@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import { marked } from 'marked';
+import Base from '../layouts/Base.astro';
+
+const posts = (await getCollection('posts')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+const MONTHS = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+];
+const formatDate = (d: Date) => `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+const stripProtocol = (url: string) => url.replace(/^https?:\/\//, '');
+---
+
+<Base
+  title="Simon Sorkin"
+  description="Simon Sorkin — AI Engineer in Stockholm. After-action reports and notes from personal projects."
+>
+  {
+    posts.map((post, idx) => (
+      <>
+        {idx > 0 && <hr class="stream-divider" />}
+        <article class="post-card">
+          <div class="pmeta">
+            <time datetime={post.data.date.toISOString().slice(0, 10)}>
+              {formatDate(post.data.date)}
+            </time>
+            <span class="read">{post.data.read_time} min read</span>
+          </div>
+
+          <h2 class="post-title">
+            <a href={`/posts/${post.id}`}>{post.data.title}</a>
+          </h2>
+
+          <div class="project">
+            <span class="lbl">Project ↗</span>
+            <a href={post.data.project_url} target="_blank" rel="noopener">
+              {stripProtocol(post.data.project_url)}
+            </a>
+          </div>
+
+          <div class="stack">
+            {post.data.stack.map((chip) => <span>{chip}</span>)}
+          </div>
+
+          <p class="dek" set:html={marked.parseInline(post.data.dek)} />
+
+          <figure>
+            <Image src={post.data.hero.image} alt={post.data.hero.alt} />
+            <figcaption set:html={marked.parseInline(post.data.hero.caption)} />
+          </figure>
+
+          <Fragment set:html={marked.parse(post.data.teaser)} />
+
+          <a class="continue" href={`/posts/${post.id}`}>Continue reading →</a>
+        </article>
+      </>
+    ))
+  }
+</Base>

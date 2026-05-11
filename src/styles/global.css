@@ -1,0 +1,374 @@
+:root {
+  --bg:        #0d0d0c;
+  --bg-soft:   #131311;
+  --code-bg:   #1a1916;
+  --fg:        #d6d2c6;
+  --fg-strong: #ece9df;
+  --soft:      #8a8478;
+  --faint:     #5a554d;
+  --rule:      #25231d;
+  --accent:    #cf764a;
+
+  --col:     640px;
+  --img-col: 820px;
+
+  --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--accent); color: var(--bg); }
+
+/* ==================================================================
+   LINK TAXONOMY — four tiers, weakest to strongest.
+   ------------------------------------------------------------------
+   T0  Bare      Typography signals clickability. No chrome at rest.
+                 Hover: accent border-bottom appears.
+                 Used on: header.bio .name, .post-title.
+
+   T1  Quiet     Small inline nav / utility links.
+                 Rest: --rule border. Hover: --accent border + --fg-strong text.
+                 Used on: header.bio nav, .end-strip, a.continue.
+
+   T2  Prose     Links inside running body text. Default <a>.
+                 Rest: underline in --faint. Hover: --accent.
+
+   T3  Emphasis  Max one per context. Draws the eye.
+                 Rest: --accent border. Hover: text shifts to --accent.
+                 Used on: .project a.
+
+   Hover always lands on --accent. No exceptions.
+   ================================================================== */
+
+/* T2 — default prose link */
+a {
+  color: var(--fg-strong);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--faint);
+  transition: text-decoration-color 120ms ease, color 120ms ease;
+}
+a:hover { text-decoration-color: var(--accent); color: var(--fg-strong); }
+
+main {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 96px 32px 128px;
+}
+
+/* ---- bio header --------------------------------------------------- */
+header.bio {
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 88px;
+}
+header.bio .name {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--fg-strong);
+  letter-spacing: -0.005em;
+  margin: 0 0 10px;
+}
+header.bio .name a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: border-color 160ms ease;
+}
+header.bio .name a:hover { border-bottom-color: var(--accent); }
+header.bio .name .alias {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--soft);
+  margin-left: 10px;
+}
+header.bio p {
+  margin: 0 0 16px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--fg);
+  max-width: 56ch;
+}
+header.bio .status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 22px;
+  font-family: var(--sans);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--fg-strong);
+  letter-spacing: -0.005em;
+}
+header.bio .status::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  flex: 0 0 auto;
+}
+header.bio nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+header.bio nav a {
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1px;
+  transition: border-color 120ms ease, color 120ms ease;
+}
+header.bio nav a:hover { border-color: var(--accent); color: var(--fg-strong); }
+
+/* ---- post meta (shared between index card and post header) -------- */
+.pmeta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.pmeta time { color: var(--soft); letter-spacing: 0.01em; }
+.pmeta .read { color: var(--soft); margin-left: auto; }
+
+.project {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: -8px 0 22px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+}
+.project .lbl {
+  color: var(--soft);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 500;
+  font-size: 11px;
+}
+.project a {
+  color: var(--fg-strong);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+.project a:hover { color: var(--accent); }
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0 0 28px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--soft);
+}
+.stack span:not(:last-child)::after {
+  content: "·";
+  margin-left: 14px;
+  color: var(--faint);
+}
+
+/* ---- post title (T0 link styling) -------------------------------- */
+h1.post-title, h2.post-title {
+  font-family: var(--sans);
+  font-weight: 500;
+  letter-spacing: -0.018em;
+  color: var(--fg-strong);
+  margin: 0 0 22px;
+  max-width: 30ch;
+}
+h2.post-title {
+  font-size: 28px;
+  line-height: 1.22;
+}
+h1.post-title {
+  font-size: 38px;
+  line-height: 1.15;
+  letter-spacing: -0.022em;
+}
+h1.post-title a, h2.post-title a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color 160ms ease;
+}
+h1.post-title a:hover, h2.post-title a:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* ---- dek (index card subhead) ------------------------------------ */
+.dek {
+  font-style: italic;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--fg);
+  margin: 0 0 28px;
+  max-width: 56ch;
+}
+
+/* ---- lede (post opening) ----------------------------------------- */
+.lede {
+  font-style: italic;
+  font-weight: 300;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--fg);
+  margin: 0 0 48px;
+  max-width: 56ch;
+}
+
+/* ---- article: index card variant --------------------------------- */
+article.post-card { margin-bottom: 96px; }
+article.post-card p {
+  margin: 0 0 18px;
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: var(--fg);
+}
+
+a.continue {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1px;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+a.continue:hover { color: var(--fg-strong); border-color: var(--accent); }
+
+.stream-divider {
+  border: 0;
+  height: 1px;
+  background: var(--rule);
+  margin: 0 0 96px;
+}
+
+/* ---- article: full post variant ---------------------------------- */
+article.post-full h2 {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.3;
+  letter-spacing: -0.012em;
+  color: var(--fg-strong);
+  margin: 64px 0 22px;
+  max-width: 28ch;
+}
+article.post-full p {
+  margin: 0 0 22px;
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: var(--fg);
+}
+article.post-full code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  color: var(--fg-strong);
+  background: var(--code-bg);
+  padding: 1px 6px;
+  border-radius: 2px;
+  border: 1px solid var(--rule);
+}
+
+/* ---- figures ----------------------------------------------------- */
+figure {
+  margin: 36px calc((var(--col) - var(--img-col)) / 2) 32px;
+  max-width: var(--img-col);
+}
+figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+}
+figure figcaption {
+  font-family: var(--sans);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--soft);
+  margin-top: 12px;
+  padding: 0 calc((var(--img-col) - var(--col)) / 2);
+  max-width: var(--col);
+}
+article.post-full figure {
+  margin: 40px calc((var(--col) - var(--img-col)) / 2) 36px;
+}
+article.post-full figure figcaption {
+  margin-top: 14px;
+}
+
+/* ---- end-of-post -------------------------------------------------- */
+.end-rule {
+  margin: 96px 0 32px;
+  border: 0;
+  height: 1px;
+  background: var(--rule);
+}
+.end-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--soft);
+}
+.end-strip a {
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1px;
+}
+.end-strip a:hover { border-color: var(--accent); color: var(--fg-strong); }
+
+/* ---- responsive --------------------------------------------------- */
+@media (max-width: 760px) {
+  :root { --img-col: 100%; }
+  main { padding: 56px 22px 96px; }
+  header.bio { margin-bottom: 64px; }
+  article.post-card { margin-bottom: 72px; }
+  h2.post-title { font-size: 24px; }
+  h1.post-title { font-size: 30px; }
+  .dek { font-size: 16.5px; }
+  .lede { font-size: 17px; margin-bottom: 36px; }
+  article.post-full h2 { font-size: 20px; margin-top: 48px; }
+  article.post-full p { font-size: 16px; }
+  article.post-card p { font-size: 16px; }
+  figure { margin: 28px 0 20px; }
+  article.post-full figure { margin: 28px 0 22px; }
+  figure figcaption { padding: 0; }
+}

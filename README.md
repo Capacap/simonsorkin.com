@@ -2,17 +2,28 @@
 
 Source for [simonsorkin.com](https://simonsorkin.com).
 
+Built with [Astro](https://astro.build/).
+
+## Develop
+
+```sh
+npm install
+npm run dev
+```
+
 ## Build
 
 ```sh
-uv sync
-uv run python build.py
+npm run build
 ```
 
-Output goes to `site/`. Open `site/index.html` in a browser to preview.
+Output goes to `dist/`.
 
 ## Layout
 
-- `posts/<slug>/post.md` — post sources with YAML front-matter and inline images
-- `templates/` — Jinja2 templates for the index and post pages
-- `build.py` — generator entry point
+- `src/content/posts/<slug>/post.md` — post sources with YAML front-matter and inline images
+- `src/content/config.ts` — content collection schema
+- `src/layouts/Base.astro` — site shell and bio header
+- `src/pages/` — routes (`/` and `/posts/<slug>`)
+- `src/styles/global.css` — single global stylesheet
+- `src/lib/rehype-figures.mjs` — pairs `![](img.png)` + `*caption*` into `<figure>`
