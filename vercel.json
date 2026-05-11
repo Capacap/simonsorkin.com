@@ -1,0 +1,4 @@
+{
+  "buildCommand": "pip install uv && uv sync --frozen && uv run python build.py",
+  "outputDirectory": "site"
+}

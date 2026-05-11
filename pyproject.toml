@@ -1,0 +1,10 @@
+[project]
+name = "simonsorkin-com"
+version = "0.1.0"
+description = "Static blog generator for simonsorkin.com."
+requires-python = ">=3.11"
+dependencies = [
+    "jinja2>=3.1",
+    "markdown>=3.5",
+    "pyyaml>=6.0",
+]
