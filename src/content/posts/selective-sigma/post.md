@@ -8,7 +8,7 @@ project_url: https://github.com/capacap/ComfyUI-Selective-Sigma-Detailer
 stack: [python, pytorch, comfyui]
 description: A ComfyUI custom sampler wrapper that adds detail selectively, only where the model is already drawing detail. What I tried, what worked, and the CFG++ bug that surfaced late.
 hero:
-  image: realistic_coverage_comparison.png
+  image: realistic_coverage_comparison.webp
   alt: "Coverage sweep at fixed strength on a Juggernaut XL portrait, with the captured mask shown in the bottom row."
   caption: Coverage sweep at fixed strength, with the captured mask shown in the bottom row. The intermediate cells show the mask concentrating on face, freckles, and hair while the sky receives a substantially attenuated boost rather than full protection.
 dek: >
@@ -55,7 +55,7 @@ Comparing the two candidates was only possible because the Debug node and its ma
 
 The preview also showed where the useful signal was coming from. Early-step diffs were doing most of the work; late-step diffs degenerate into indistinct noise as the prediction stabilises. The EMA default sits at 0.9 so the early masks carry forward through the run instead of being averaged out by the noisier late-step contributions. The preview itself captures the mask at the final step, which is the dirtiest version of itself the run produces. Mid-run it's cleaner, before the late-step noise has fed in. The preview is therefore a final-step check, not a portrait of the mask at its sharpest.
 
-![Coverage sweep at fixed strength on a Juggernaut XL portrait, with the captured mask shown in the bottom row.](realistic_coverage_comparison.png)
+![Coverage sweep at fixed strength on a Juggernaut XL portrait, with the captured mask shown in the bottom row.](realistic_coverage_comparison.webp)
 *Coverage sweep at fixed strength, with the captured mask shown in the bottom row. At `c=0` no detail pass runs; at `c=1` the mask saturates and a single-pass fast path applies. The intermediate cells show the mask concentrating on face, freckles, and hair while the sky receives a substantially attenuated boost rather than full protection.*
 
 ## Cutting the user-facing surface

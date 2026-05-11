@@ -8,7 +8,7 @@ project_url: https://github.com/Capacap/blender-PixelOE
 stack: [python, numpy, scipy, pillow, blender]
 description: A three-day port of KohakuBlueleaf's PixelOE off PyTorch, Kornia, and OpenCV onto pure numpy, Pillow, and scipy, packaged as a Blender add-on. About the verification harness that made the pace possible.
 hero:
-  image: harness_unquantized.png
+  image: harness_unquantized.webp
   alt: "Harness output panel: input, upstream output, port output, and a per-pixel ΔE76 heatmap of port versus upstream."
   caption: Quantization disabled. The bottom-right diff is dim and tracks silhouettes. The algorithmic drift between port and upstream is real but low, concentrated where edges fall.
 dek: >
@@ -48,7 +48,7 @@ The non-obvious choice was exposing each pipeline stage as an independently call
 
 Building this took meaningful time up front, before any port code existed, and it is the single piece of infrastructure I would repeat without question on a port of any similar shape.
 
-![Harness output panel with quantization disabled: input, upstream output, port output, and a per-pixel ΔE76 heatmap of port versus upstream.](harness_unquantized.png)
+![Harness output panel with quantization disabled: input, upstream output, port output, and a per-pixel ΔE76 heatmap of port versus upstream.](harness_unquantized.webp)
 *Quantization disabled. The bottom-right diff is dim and tracks silhouettes. The algorithmic drift between port and upstream is real but low, concentrated where edges fall.*
 
 ## What per-stage comparison catches
@@ -59,7 +59,7 @@ The colour-matching stage gave me an algebraic equivalence I could actually trus
 
 The most useful thing the harness ever told me was that my error metric was bundling two different effects. End-to-end ΔE76 between port and upstream sat around four to five on a 1k input, which sounds bad. Once I disabled colour quantization, the spread tightened sharply, from a range of 1.7-8.2 across the test set down to 0.8-5.5. The remainder was k-means picking different but equally optimal palettes for the same input, where the port uses k-means++ initialisation and upstream does best-of-four cv2 random-init runs. The two methods land on different cluster centroids of comparable distortion, and borderline pixels get assigned to neighbouring clusters, which produces a real RGB difference between outputs without producing a quality difference. Without splitting that out I would have spent a week chasing palette noise as though it were a bug in the algorithm port.
 
-![Same input with 32-colour quantization enabled. The bottom-right diff floods the whole face.](harness_quantized.png)
+![Same input with 32-colour quantization enabled. The bottom-right diff floods the whole face.](harness_quantized.webp)
 *Same input, with 32-colour quantization enabled. The bottom-right diff floods the whole face. None of that is algorithmic drift; it is two different k-means runs disagreeing on which cluster a borderline pixel belongs to. End-to-end ΔE alone could not tell me that. Decomposing the metric did.*
 
 ## What the harness made cheap
