@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  OG card source. Render to public/og.png with Inkscape:
+    inkscape tools/og.svg [export-type png] [export-filename public/og.png] [export-width 1200]
+  (replace bracketed pairs with leading double-dashes; double-dashes are not legal inside XML comments)
+  Requires IBM Plex Sans and IBM Plex Mono installed locally.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0d0d0c"/>
+
+  <text x="110" y="300"
+        font-family="IBM Plex Sans" font-weight="500" font-size="88"
+        fill="#ece9df" letter-spacing="-2">Simon Sorkin<tspan
+        dx="28" font-family="IBM Plex Mono" font-weight="400" font-size="36"
+        fill="#8a8478" letter-spacing="0">"Capacap"</tspan></text>
+
+  <text x="110" y="375"
+        font-family="IBM Plex Sans" font-weight="400" font-size="36"
+        fill="#d6d2c6">AI Engineer in Stockholm</text>
+
+  <text x="1090" y="585" text-anchor="end"
+        font-family="IBM Plex Sans" font-weight="500" font-size="24"
+        fill="#cf764a">simonsorkin.com</text>
+</svg>
