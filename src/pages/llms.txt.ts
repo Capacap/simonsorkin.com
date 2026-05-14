@@ -10,9 +10,9 @@ export const GET: APIRoute = async ({ site }) => {
   const lines = [
     '# Simon Sorkin',
     '',
-    '> AI Engineer in Stockholm. Technical writeups on AI engineering, image processing, and computer vision projects.',
+    '> AI Engineer in Stockholm. After-action reports, debugging notes, and essays on AI.',
     '',
-    'Simon Sorkin (Capacap) is an AI Engineer in Stockholm, open to full-time roles. This site collects writing on his projects.',
+    'Simon Sorkin (Capacap) is an AI Engineer in Stockholm, open to full-time roles. This site collects his writing.',
     '',
     '## Posts',
     '',

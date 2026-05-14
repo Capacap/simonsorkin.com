@@ -10,7 +10,7 @@ export const GET: APIRoute = async ({ site }) => {
   const preamble = [
     '# Simon Sorkin — Writing',
     '',
-    'Technical writeups by Simon Sorkin (Capacap), AI Engineer in Stockholm.',
+    'Writing by Simon Sorkin (Capacap), AI Engineer in Stockholm.',
     `Site: ${base}`,
     '',
   ].join('\n');
