@@ -34,18 +34,22 @@ const stripProtocol = (url: string) => url.replace(/^https?:\/\//, '');
 
       <h1 class="post-title">{post.data.title}</h1>
 
-      <div class="project">
-        <span class="lbl">Project ↗</span>
-        <a href={post.data.project_url} target="_blank" rel="noopener">
-          {stripProtocol(post.data.project_url)}
-        </a>
-      </div>
+      {post.data.project_url && (
+        <div class="project">
+          <span class="lbl">Project ↗</span>
+          <a href={post.data.project_url} target="_blank" rel="noopener">
+            {stripProtocol(post.data.project_url)}
+          </a>
+        </div>
+      )}
 
-      <div class="stack">
-        {post.data.stack.map((chip) => <span>{chip}</span>)}
-      </div>
+      {post.data.stack && post.data.stack.length > 0 && (
+        <div class="stack">
+          {post.data.stack.map((chip) => <span>{chip}</span>)}
+        </div>
+      )}
 
-      <p class="lede" set:html={marked.parseInline(post.data.lede)} />
+      {post.data.lede && <p class="lede" set:html={marked.parseInline(post.data.lede)} />}
     </header>
 
     <Content />

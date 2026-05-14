@@ -13,18 +13,20 @@ const posts = defineCollection({
       slug: z.string(),
       date: z.date(),
       read_time: z.number().int().positive(),
-      project: z.string().optional(),
-      project_url: z.string().url(),
-      stack: z.array(z.string()),
       description: z.string(),
-      dek: z.string(),
-      lede: z.string(),
-      teaser: z.string(),
-      hero: z.object({
-        image: image(),
-        alt: z.string(),
-        caption: z.string(),
-      }),
+      project: z.string().optional(),
+      project_url: z.string().url().optional(),
+      stack: z.array(z.string()).optional(),
+      dek: z.string().optional(),
+      lede: z.string().optional(),
+      teaser: z.string().optional(),
+      hero: z
+        .object({
+          image: image(),
+          alt: z.string(),
+          caption: z.string(),
+        })
+        .optional(),
     }),
 });
 

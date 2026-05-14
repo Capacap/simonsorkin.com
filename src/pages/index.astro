@@ -36,25 +36,31 @@ const stripProtocol = (url: string) => url.replace(/^https?:\/\//, '');
             <a href={`/posts/${post.id}`}>{post.data.title}</a>
           </h2>
 
-          <div class="project">
-            <span class="lbl">Project ↗</span>
-            <a href={post.data.project_url} target="_blank" rel="noopener">
-              {stripProtocol(post.data.project_url)}
-            </a>
-          </div>
+          {post.data.project_url && (
+            <div class="project">
+              <span class="lbl">Project ↗</span>
+              <a href={post.data.project_url} target="_blank" rel="noopener">
+                {stripProtocol(post.data.project_url)}
+              </a>
+            </div>
+          )}
 
-          <div class="stack">
-            {post.data.stack.map((chip) => <span>{chip}</span>)}
-          </div>
+          {post.data.stack && post.data.stack.length > 0 && (
+            <div class="stack">
+              {post.data.stack.map((chip) => <span>{chip}</span>)}
+            </div>
+          )}
 
-          <p class="dek" set:html={marked.parseInline(post.data.dek)} />
+          <p class="dek" set:html={marked.parseInline(post.data.dek ?? post.data.description)} />
 
-          <figure>
-            <Image src={post.data.hero.image} alt={post.data.hero.alt} />
-            <figcaption set:html={marked.parseInline(post.data.hero.caption)} />
-          </figure>
+          {post.data.hero && (
+            <figure>
+              <Image src={post.data.hero.image} alt={post.data.hero.alt} />
+              <figcaption set:html={marked.parseInline(post.data.hero.caption)} />
+            </figure>
+          )}
 
-          <Fragment set:html={marked.parse(post.data.teaser)} />
+          {post.data.teaser && <Fragment set:html={marked.parse(post.data.teaser)} />}
 
           <a class="continue" href={`/posts/${post.id}`}>Continue reading →</a>
         </article>

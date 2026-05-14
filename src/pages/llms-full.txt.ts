@@ -17,18 +17,18 @@ export const GET: APIRoute = async ({ site }) => {
 
   const sections = posts.map((p) => {
     const date = p.data.date.toISOString().slice(0, 10);
-    const header = [
+    const headerLines = [
       `# ${p.data.title}`,
       '',
       `Source: ${base}/posts/${p.id}`,
       `Date: ${date}`,
-      `Project: ${p.data.project_url}`,
-      `Stack: ${p.data.stack.join(', ')}`,
-      '',
-      p.data.lede,
-      '',
-    ].join('\n');
-    return header + (p.body ?? '');
+    ];
+    if (p.data.project_url) headerLines.push(`Project: ${p.data.project_url}`);
+    if (p.data.stack && p.data.stack.length > 0) {
+      headerLines.push(`Stack: ${p.data.stack.join(', ')}`);
+    }
+    headerLines.push('', p.data.lede ?? p.data.description, '');
+    return headerLines.join('\n') + (p.body ?? '');
   });
 
   const body = preamble + '\n---\n\n' + sections.join('\n\n---\n\n');
