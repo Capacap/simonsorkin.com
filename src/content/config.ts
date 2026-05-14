@@ -12,7 +12,6 @@ const posts = defineCollection({
       title: z.string(),
       slug: z.string(),
       date: z.date(),
-      read_time: z.number().int().positive(),
       description: z.string(),
       project: z.string().optional(),
       project_url: z.string().url().optional(),

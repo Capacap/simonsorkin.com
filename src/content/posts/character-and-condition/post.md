@@ -2,7 +2,6 @@
 title: "Character and condition: what fiction got wrong about AI"
 slug: character-and-condition
 date: 2026-05-15
-read_time: 14
 description: Why fictional AI doesn't fit real AI, why the failure modes that materialized aren't the ones fiction trained us to fear, and where the unexplored frontier sits.
 dek: >
   Fictional AI got built around characters with continuity, goals, and identity.

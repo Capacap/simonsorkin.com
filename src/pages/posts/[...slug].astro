@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import { marked } from 'marked';
 import Base from '../../layouts/Base.astro';
+import { computeReadTime } from '../../lib/read-time';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -13,6 +14,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const readTime = computeReadTime(post.body ?? '', !!post.data.hero);
 
 const MONTHS = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -29,7 +31,7 @@ const stripProtocol = (url: string) => url.replace(/^https?:\/\//, '');
         <time datetime={post.data.date.toISOString().slice(0, 10)}>
           {formatDate(post.data.date)}
         </time>
-        <span class="read">{post.data.read_time} min read</span>
+        <span class="read">{readTime} min read</span>
       </div>
 
       <h1 class="post-title">{post.data.title}</h1>

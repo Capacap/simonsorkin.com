@@ -2,7 +2,6 @@
 title: Why Dolphin wasn't showing my Blender thumbnails
 slug: dolphin-blender-thumbnails
 date: 2026-05-14
-read_time: 10
 description: A debugging session that turned on Dolphin's thumbnail tier behavior, a folder-icon hint that broke the case open, and a confirmation in the KIO source.
 dek: >
   Dolphin stopped showing thumbnails for .blend files in a folder we use daily,

@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import { marked } from 'marked';
 import Base from '../layouts/Base.astro';
+import { computeReadTime } from '../lib/read-time';
 
 const posts = (await getCollection('posts')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
@@ -29,7 +30,7 @@ const stripProtocol = (url: string) => url.replace(/^https?:\/\//, '');
             <time datetime={post.data.date.toISOString().slice(0, 10)}>
               {formatDate(post.data.date)}
             </time>
-            <span class="read">{post.data.read_time} min read</span>
+            <span class="read">{computeReadTime(post.body ?? '', !!post.data.hero)} min read</span>
           </div>
 
           <h2 class="post-title">

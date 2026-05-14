@@ -2,7 +2,6 @@
 title: Region-selective sigma in ComfyUI
 slug: selective-sigma
 date: 2026-04-28
-read_time: 14
 project: comfyui-selective-sigma-detailer
 project_url: https://github.com/capacap/ComfyUI-Selective-Sigma-Detailer
 stack: [python, pytorch, comfyui]

@@ -2,7 +2,6 @@
 title: Porting PixelOE in three days
 slug: porting-pixeloe
 date: 2026-04-12
-read_time: 12
 project: blender-pixeloe
 project_url: https://github.com/Capacap/blender-PixelOE
 stack: [python, numpy, scipy, pillow, blender]
