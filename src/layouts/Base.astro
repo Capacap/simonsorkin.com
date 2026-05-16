@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title: string;
@@ -62,5 +63,6 @@ const ogImage = new URL('/og.png', Astro.site).toString();
       </header>
       <slot />
     </main>
+    <Analytics />
   </body>
 </html>
