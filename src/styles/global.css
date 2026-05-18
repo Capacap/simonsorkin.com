@@ -299,6 +299,10 @@ article.post-full code {
   border-radius: 2px;
   border: 1px solid var(--rule);
 }
+article.post-full pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 
 /* ---- figures ----------------------------------------------------- */
 figure {
