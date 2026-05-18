@@ -7,6 +7,7 @@ export default defineConfig({
     service: passthroughImageService(),
   },
   markdown: {
+    syntaxHighlight: false,
     rehypePlugins: [rehypeFigures],
   },
 });

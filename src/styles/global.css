@@ -300,8 +300,19 @@ article.post-full code {
   border: 1px solid var(--rule);
 }
 article.post-full pre {
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  padding: 18px;
+  margin: 28px 0;
+  line-height: 1.6;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+}
+article.post-full pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
 }
 
 /* ---- figures ----------------------------------------------------- */
@@ -374,5 +385,6 @@ article.post-full figure figcaption {
   article.post-card p { font-size: 16px; }
   figure { margin: 28px 0 20px; }
   article.post-full figure { margin: 28px 0 22px; }
+  article.post-full pre { margin: 22px 0; padding: 14px; }
   figure figcaption { padding: 0; }
 }
